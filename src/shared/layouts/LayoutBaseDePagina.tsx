@@ -28,8 +28,8 @@ export const LayoutBaseDePagina: React.FC<ILayoutBaseDePaginaProps> = ({ titulo,
         alignItems="center"
         padding={1}
         gap={2}
-        bgcolor={theme.palette.background.paper}
-        height={theme.spacing(smDown ? 6 : mdDown ? 8 : 12)}
+        bgcolor={theme.palette.background.default}
+        height={theme.spacing(smDown ? 6 : mdDown ? 8 : 10)}
       >
         {smDown && (
           <IconButton onClick={toggleDrawerOpen}>
