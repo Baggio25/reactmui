@@ -20,6 +20,7 @@
     "@types/node": "^16.18.105",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "json-server": "^1.0.0-beta.2",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -27,6 +28,7 @@
     "start": "set BROWSER=none&& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "mock": "json-server -w -p 3333 ./mock/database.json",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
