@@ -47,13 +47,71 @@ const getAll = async (
   }
 };
 
-const getById = async (): Promise<any> => {};
+const getById = async (id: number): Promise<IDetalhePessoa | Error> => {
+  try {
+    const urlRelativa = `/pessoas/${id}`;
+    const { data } = await API.get(urlRelativa);
 
-const create = async (): Promise<any> => {};
+    if (data) {
+      return data;
+    }
 
-const update = async (): Promise<any> => {};
+    return new Error("Erro ao buscar o registro");
+  } catch (error) {
+    console.error(error);
+    return new Error(
+      (error as { message: string }).message || "Erro ao buscar registro"
+    );
+  }
+};
 
-const deleteById = async (): Promise<any> => {};
+const create = async (
+  dados: Omit<IDetalhePessoa, "id">
+): Promise<number | Error> => {
+  try {
+    const urlRelativa = "/pessoas";
+    const { data } = await API.post<IDetalhePessoa>(urlRelativa, dados);
+
+    if (data) {
+      return data.id;
+    }
+
+    return new Error("Erro ao criar o registro");
+  } catch (error) {
+    console.error(error);
+    return new Error(
+      (error as { message: string }).message || "Erro ao criar o registro"
+    );
+  }
+};
+
+const update = async (id: number, dados: IDetalhePessoa): Promise<void | Error> => {
+  try {
+    
+    const urlRelativa = `/pessoas/${id}`;    
+    await API.put<IDetalhePessoa>(urlRelativa, dados);
+
+  } catch (error) {
+    console.error(error);
+    return new Error(
+      (error as { message: string }).message || "Erro ao atualizar o registro"
+    );
+  }
+};
+
+const deleteById = async (id: number): Promise<void | Error> => {
+  try {
+    
+    const urlRelativa = `/pessoas/${id}`;    
+    await API.delete<IDetalhePessoa>(urlRelativa);
+
+  } catch (error) {
+    console.error(error);
+    return new Error(
+      (error as { message: string }).message || "Erro ao excluir o registro"
+    );
+  }
+};
 
 export const PessoasService = {
   getAll,
