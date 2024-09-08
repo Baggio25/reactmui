@@ -2,13 +2,33 @@
   "pessoas": [
     {
       "id": 1,
-      "nome": "Juca",
-      "sobrenome": "Silva"
+      "email": "juca@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Juca Silva"
     },
     {
       "id": 2,
-      "nome": "Rodrigo",
-      "sobrenome": "Baggio"
+      "email": "rodrigobaggio@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Rodrigo Baggio"
+    },
+    {
+      "id": 3,
+      "email": "analubaggio@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Analu Baggio"
+    },
+    {
+      "id": 4,
+      "email": "taniabaggio@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Tania Baggio"
+    },
+    {
+      "id": 5,
+      "email": "joaosilva@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "João da Silva"
     }
   ]
 }
