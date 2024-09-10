@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 
 import { FerramentasDaListagem } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { useDebounce } from "../../shared/hooks";
 import { IListagemPessoa, PessoasService } from "../../shared/services/api/pessoas/PessoasService";
+import { Environment } from "../../shared/environments";
 
 export const ListagemDePessoas: React.FC = () => {
 
@@ -55,12 +56,12 @@ export const ListagemDePessoas: React.FC = () => {
         />
       )}
     >
-      <TableContainer 
-        component={Paper} 
+      <TableContainer
+        component={Paper}
         variant="outlined"
-        sx={{m: 1, width: 'auto'}}
+        sx={{ m: 1, width: 'auto' }}
       >
-      
+
         <Table>
           <TableHead>
             <TableRow>
@@ -83,6 +84,20 @@ export const ListagemDePessoas: React.FC = () => {
             )
             )}
           </TableBody>
+
+          {totalCount === 0 && !isLoading && (
+            <caption>{Environment.LISTAGEM_VAZIA}</caption>
+          )}
+
+          {isLoading && (
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={4}>
+                  <LinearProgress variant="indeterminate" />
+                </TableCell>
+              </TableRow>
+            </TableFooter>
+          )}
         </Table>
 
       </TableContainer>
