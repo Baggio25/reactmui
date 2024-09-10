@@ -1,6 +1,8 @@
+/* eslint-disable no-restricted-globals */
+
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Icon, IconButton, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 
 import { FerramentasDaListagem } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
@@ -12,10 +14,11 @@ export const ListagemDePessoas: React.FC = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
+  const navigate = useNavigate();
 
   const [rows, setRows] = useState<IListagemPessoa[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
 
   const busca = useMemo(() => {
     return searchParams.get('busca') || '';
@@ -39,14 +42,30 @@ export const ListagemDePessoas: React.FC = () => {
             return;
           }
 
-          setRows(response.data);
           setTotalCount(response.totalCount);
+          setRows(response.data);
 
         });
 
     });
 
   }, [busca, pagina]);
+
+  const handleDelete = (id: number) => {
+    if (confirm("Confirma a exclusão?")) {
+      PessoasService.deleteById(id)
+        .then(result => {
+          if (result instanceof Error) {
+            alert(result.message);
+          } else {
+            setRows(oldRows => [
+              ...oldRows.filter(oldRow => oldRow.id !== id)
+            ])
+            alert('Registro excluído com sucesso.');
+          }
+        });
+    }
+  }
 
   return (
     <LayoutBaseDePagina
@@ -83,7 +102,14 @@ export const ListagemDePessoas: React.FC = () => {
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.nomeCompleto}</TableCell>
                 <TableCell>{row.email}</TableCell>
-                <TableCell>Ações</TableCell>
+                <TableCell>
+                  <IconButton size="small" onClick={() => navigate(`/pessoas/detalhe/${row.id}`)}>
+                    <Icon>edit</Icon>
+                  </IconButton>
+                  <IconButton size="small" onClick={() => handleDelete(row.id)}>
+                    <Icon>delete</Icon>
+                  </IconButton>
+                </TableCell>
               </TableRow>
             )
             )}
@@ -103,7 +129,7 @@ export const ListagemDePessoas: React.FC = () => {
 
             )}
 
-            {(!isLoading && ((totalCount > 0) && (totalCount > Environment.LIMITE_DE_LINHAS)) && (
+            {(!isLoading && (totalCount > 0 && totalCount > Environment.LIMITE_DE_LINHAS) && (
               <TableRow>
                 <TableCell colSpan={4}>
                   <Pagination
