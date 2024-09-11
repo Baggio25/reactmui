@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-restricted-globals */
 
 import { useEffect, useMemo, useState } from "react";
