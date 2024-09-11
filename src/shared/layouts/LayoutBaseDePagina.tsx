@@ -29,7 +29,7 @@ export const LayoutBaseDePagina: React.FC<ILayoutBaseDePaginaProps> = ({ titulo,
         padding={1}
         gap={2}
         bgcolor={theme.palette.background.default}
-        height={theme.spacing(smDown ? 6 : mdDown ? 8 : 10)}
+        height={theme.spacing(smDown ? 5 : mdDown ? 7 : 9)}
       >
         {smDown && (
           <IconButton onClick={toggleDrawerOpen}>
