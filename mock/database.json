@@ -1,12 +1,6 @@
 {
   "pessoas": [
     {
-      "id": 2,
-      "email": "rodrigobaggio@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "Rodrigo Baggio"
-    },
-    {
       "id": 3,
       "email": "analubaggio@gmail.com",
       "cidadeId": 1,
@@ -29,12 +23,6 @@
       "email": "joaosilva1@gmail.com",
       "cidadeId": 1,
       "nomeCompleto": "João da Silva 1"
-    },
-    {
-      "id": 7,
-      "email": "joaosilva2@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "João da Silva 2"
     },
     {
       "id": 8,
